@@ -31,7 +31,7 @@ msgid "Prasun Bannerjee"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://ticktechtoe.in"
+msgid "https://prasun.in"
 msgstr ""
 
 #: includes/class-tuckaway-assets.php:269
