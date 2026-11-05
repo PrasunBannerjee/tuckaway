@@ -27,7 +27,7 @@ msgid "Adds a [readmore] shortcode that splits content into a visible part and a
 msgstr ""
 
 #. Author of the plugin
-msgid "TickTechToe"
+msgid "Prasun Bannerjee"
 msgstr ""
 
 #. Author URI of the plugin

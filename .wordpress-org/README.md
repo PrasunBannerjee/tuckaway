@@ -21,7 +21,7 @@ plugin is submitted.
 | `assets/banner-1544x500.png` | 1544 × 500 | Rebuilt from `banner-retina.svg`, same change. |
 
 **One deliberate edit from the delivered brand kit.** Both banner SVGs
-ship with "SIMPLE READ MORE" outlined directly into the artwork, sitting
+ship with the plugin name outlined directly into the artwork, sitting
 in the exact calm left third the guide's own rules reserve for
 WordPress's title overlay:
 
