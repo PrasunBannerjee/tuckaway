@@ -93,7 +93,7 @@ final class Tuckaway_Assets {
 	 *    That is also why detection happens while content renders,
 	 *    rather than by inspecting post_content up front with
 	 *    has_shortcode(), which misses builder pages.
-	 * 2. A hand-pasted `tuckaway-marker` span, which runs no plugin code of
+	 * 2. A hand-pasted `taway-marker` span, which runs no plugin code of
 	 *    its own. A plain substring check on the rendered output of the
 	 *    usual places such a span ends up catches it: post content,
 	 *    blocks (which also covers block templates and block widgets),

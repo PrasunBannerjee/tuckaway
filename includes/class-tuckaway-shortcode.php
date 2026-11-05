@@ -48,7 +48,7 @@ final class Tuckaway_Shortcode {
 	 * CSS class the front-end script looks for.
 	 *
 	 * This one is effectively public API: the documentation tells site
-	 * owners to paste `<span class="tuckaway-marker"></span>` by hand into
+	 * owners to paste `<span class="taway-marker"></span>` by hand into
 	 * widgets that do not run shortcodes. Renaming it in a future
 	 * release would silently break every page doing that, so treat it
 	 * as fixed.
@@ -56,7 +56,7 @@ final class Tuckaway_Shortcode {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const MARKER_CLASS = 'tuckaway-marker';
+	const MARKER_CLASS = 'taway-marker';
 
 	/**
 	 * Hook the shortcode.

@@ -12,7 +12,7 @@ Type `[readmore]` on its own line anywhere in your content. Everything after tha
 
 If another plugin on the site also registers `[readmore]`, type `[tuckaway]` instead; it does exactly the same thing.
 
-For widgets that do not process shortcodes, paste `<span class="tuckaway-marker"></span>` instead. It behaves identically.
+For widgets that do not process shortcodes, paste `<span class="taway-marker"></span>` instead. It behaves identically.
 
 The shortcode renders nothing but that empty marker span. All splitting, wrapping, and animation happens client-side, which is what keeps the plugin editor-agnostic.
 
@@ -64,7 +64,7 @@ add_filter( 'tuckaway_load_everywhere', '__return_true' );
 
 The CSS and JS load only on pages that use the plugin. The shortcode
 requests them when it renders, so any editor or page builder that runs
-shortcodes is covered. A hand-pasted `tuckaway-marker` span runs no plugin
+shortcodes is covered. A hand-pasted `taway-marker` span runs no plugin
 code, so the rendered output of post content, blocks (including block
 templates and block widgets), classic text widgets, and Elementor
 widgets is checked for it instead. A marker anywhere else, such as a

@@ -14,7 +14,7 @@ Initial release.
 ### Features
 
 - `[readmore]` shortcode that splits content into a visible part and a
-  collapsible part, plus an equivalent `tuckaway-marker` span for widgets
+  collapsible part, plus an equivalent `taway-marker` span for widgets
   that do not process shortcodes. `[tuckaway]` does the same thing, for
   sites where another plugin has claimed `[readmore]`.
 - "Read Less" is placed at the end of the revealed content rather than

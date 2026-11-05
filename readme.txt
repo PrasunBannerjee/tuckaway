@@ -41,7 +41,7 @@ This plugin never relocates your elements. Each one that needs to hide becomes a
 
 = Works with =
 
-The block editor, the Classic Editor, and page builders, including Elementor's free Text Editor widget. For any widget that does not process shortcodes, such as a raw HTML widget, paste `<span class="tuckaway-marker"></span>` instead; it behaves identically.
+The block editor, the Classic Editor, and page builders, including Elementor's free Text Editor widget. For any widget that does not process shortcodes, such as a raw HTML widget, paste `<span class="taway-marker"></span>` instead; it behaves identically.
 
 Elementor is a trademark of Elementor Ltd. This plugin is an independent project and is not affiliated with, endorsed by, or sponsored by them.
 
@@ -81,7 +81,7 @@ There isn't one. The plugin has exactly one behavior, so there's nothing to choo
 
 = Nothing happens, and `[readmore]` shows up literally on the page =
 
-The widget you are using does not process shortcodes. Paste `<span class="tuckaway-marker"></span>` instead, which does exactly the same thing.
+The widget you are using does not process shortcodes. Paste `<span class="taway-marker"></span>` instead, which does exactly the same thing.
 
 = Another plugin also uses `[readmore]` =
 
@@ -107,7 +107,7 @@ You can also define `TUCKAWAY_LABEL_MORE` and `TUCKAWAY_LABEL_LESS` in `wp-confi
 
 By design, the plugin sets no color, underline, or font on the toggles, so they inherit your theme's existing link styling automatically. To override that, add your own rule in **Appearance → Customize → Additional CSS**:
 
-`.tuckaway-toggle {
+`.taway-toggle {
 	color: #2563eb;
 	text-decoration: none;
 }`
@@ -116,7 +116,7 @@ By design, the plugin sets no color, underline, or font on the toggles, so they 
 
 Target the same class from Additional CSS:
 
-`.tuckaway-hide-el {
+`.taway-hide-el {
 	transition: grid-template-rows 0.6s ease-in-out;
 }`
 

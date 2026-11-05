@@ -20,21 +20,21 @@
 <div class="case" id="case-basic">
 	<h2>1. Marker alone on its own line</h2>
 	<p>Always visible paragraph.</p>
-	<p><span class="tuckaway-marker" aria-hidden="true"></span></p>
+	<p><span class="taway-marker" aria-hidden="true"></span></p>
 	<p>Hidden paragraph one.</p>
 	<p>Hidden paragraph two.</p>
 </div>
 
 <div class="case" id="case-midsentence">
 	<h2>2. Marker mid-sentence (paragraph split)</h2>
-	<p class="styled" data-keep="yes">Visible start of sentence. <span class="tuckaway-marker" aria-hidden="true"></span>Hidden remainder of the very same sentence.</p>
+	<p class="styled" data-keep="yes">Visible start of sentence. <span class="taway-marker" aria-hidden="true"></span>Hidden remainder of the very same sentence.</p>
 	<p>A following hidden paragraph.</p>
 </div>
 
 <div class="case" id="case-list">
 	<h2>3. Marker followed by a list and a table</h2>
 	<p>Visible.</p>
-	<p><span class="tuckaway-marker" aria-hidden="true"></span></p>
+	<p><span class="taway-marker" aria-hidden="true"></span></p>
 	<ul><li>Bullet one</li><li>Bullet two</li></ul>
 	<ol><li>Number one</li></ol>
 	<table><tbody><tr><td>Cell A</td><td>Cell B</td></tr></tbody></table>
@@ -43,13 +43,13 @@
 <div class="case" id="case-nothing-after">
 	<h2>4. Marker with nothing after it (should add no toggle)</h2>
 	<p>Visible only.</p>
-	<p><span class="tuckaway-marker" aria-hidden="true"></span></p>
+	<p><span class="taway-marker" aria-hidden="true"></span></p>
 </div>
 
 <div class="case" id="case-focusable">
 	<h2>5. Focusable content inside the collapsed section (inert check)</h2>
 	<p>Visible.</p>
-	<p><span class="tuckaway-marker" aria-hidden="true"></span></p>
+	<p><span class="taway-marker" aria-hidden="true"></span></p>
 	<p><a id="buried-link" href="https://example.com">A link that must not be tabbable while collapsed</a></p>
 </div>
 
@@ -57,7 +57,7 @@
 	<h2>6. Bare marker among block elements (Custom HTML block)</h2>
 	<div class="layout" data-keep="yes">
 		<p>Visible.</p>
-		<span class="tuckaway-marker"></span>
+		<span class="taway-marker"></span>
 		<p>Hidden one.</p>
 		<p>Hidden two.</p>
 	</div>
@@ -66,27 +66,27 @@
 <div class="case" id="case-widget">
 	<h2>7. Bare text in a page-builder widget, button widget after it</h2>
 	<div class="builder-container">
-		<div class="widget-text" data-id="abc123">Visible bare text.<br><span class="tuckaway-marker"></span><br>Hidden bare text, <strong>still hidden</strong>.</div>
+		<div class="widget-text" data-id="abc123">Visible bare text.<br><span class="taway-marker"></span><br>Hidden bare text, <strong>still hidden</strong>.</div>
 		<div class="widget-button"><a href="#">Explore your stay</a></div>
 	</div>
 </div>
 
 <div class="case" id="case-linebreaks">
 	<h2>8. Marker between line breaks inside one paragraph</h2>
-	<p>Visible line.<br><span class="tuckaway-marker"></span><br>Hidden line.</p>
+	<p>Visible line.<br><span class="taway-marker"></span><br>Hidden line.</p>
 </div>
 
 <div class="case" id="case-own-tabindex">
 	<h2>9. First hidden element already has its own tabindex</h2>
 	<p>Visible.</p>
-	<p><span class="tuckaway-marker" aria-hidden="true"></span></p>
+	<p><span class="taway-marker" aria-hidden="true"></span></p>
 	<p tabindex="0">Hidden, but deliberately focusable by its author.</p>
 </div>
 
 <div class="case" id="case-inline-block">
 	<h2>10. Bare text in an inline-block widget, button widget after it</h2>
 	<div class="builder-container">
-		<div class="widget-text" style="display: inline-block">Visible bare text.<span class="tuckaway-marker"></span>Hidden bare text.</div>
+		<div class="widget-text" style="display: inline-block">Visible bare text.<span class="taway-marker"></span>Hidden bare text.</div>
 		<div class="widget-button"><a href="#">Button</a></div>
 	</div>
 </div>
@@ -94,7 +94,7 @@
 <div class="case" id="case-inline-flex">
 	<h2>11. Bare text in an inline-flex widget, another widget after it</h2>
 	<div class="builder-container">
-		<div class="widget-text" style="display: inline-flex">Visible bare text.<span class="tuckaway-marker"></span>Hidden bare text.</div>
+		<div class="widget-text" style="display: inline-flex">Visible bare text.<span class="taway-marker"></span>Hidden bare text.</div>
 		<div class="widget-other"><p>Another widget.</p></div>
 	</div>
 </div>
@@ -102,14 +102,14 @@
 <div class="case" id="case-flex">
 	<h2>12. Bare text in a flex widget, button widget after it</h2>
 	<div class="builder-container">
-		<div class="widget-text" style="display: flex">Visible bare text.<span class="tuckaway-marker"></span>Hidden bare text.</div>
+		<div class="widget-text" style="display: flex">Visible bare text.<span class="taway-marker"></span>Hidden bare text.</div>
 		<div class="widget-button"><a href="#">Button</a></div>
 	</div>
 </div>
 
 <div class="case" id="case-inline-parent">
 	<h2>13. Marker inside an inline element within a paragraph</h2>
-	<p>Visible <strong>bold<span class="tuckaway-marker"></span> hidden bold</strong> text.</p>
+	<p>Visible <strong>bold<span class="taway-marker"></span> hidden bold</strong> text.</p>
 	<p>Following paragraph.</p>
 </div>
 
@@ -133,28 +133,28 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	// --- Case 1 ---
 	var c1 = q('#case-basic');
-	check('1. one "Read More" toggle created', c1.querySelectorAll('.tuckaway-toggle-more').length === 1);
-	check('1. "Read Less" toggle created and hidden', c1.querySelector('.tuckaway-toggle-less') && c1.querySelector('.tuckaway-toggle-less').hidden);
-	check('1. both following paragraphs collapsed', c1.querySelectorAll('.tuckaway-hide-el').length === 2,
-		'got ' + c1.querySelectorAll('.tuckaway-hide-el').length);
-	check('1. marker span removed from DOM', c1.querySelectorAll('.tuckaway-marker').length === 0);
-	check('1. empty anchor paragraph hidden', !!c1.querySelector('.tuckaway-anchor-empty'));
-	var c1more = c1.querySelector('.tuckaway-toggle-more');
+	check('1. one "Read More" toggle created', c1.querySelectorAll('.taway-toggle-more').length === 1);
+	check('1. "Read Less" toggle created and hidden', c1.querySelector('.taway-toggle-less') && c1.querySelector('.taway-toggle-less').hidden);
+	check('1. both following paragraphs collapsed', c1.querySelectorAll('.taway-hide-el').length === 2,
+		'got ' + c1.querySelectorAll('.taway-hide-el').length);
+	check('1. marker span removed from DOM', c1.querySelectorAll('.taway-marker').length === 0);
+	check('1. empty anchor paragraph hidden', !!c1.querySelector('.taway-anchor-empty'));
+	var c1more = c1.querySelector('.taway-toggle-more');
 	check('1. toggle is an <a> with role=button', c1more.tagName === 'A' && c1more.getAttribute('role') === 'button');
 	check('1. aria-controls lists every collapsed id',
 		c1more.getAttribute('aria-controls').split(' ').filter(Boolean).length === 2);
-	var c1last = c1.querySelectorAll('.tuckaway-hide-el')[1];
+	var c1last = c1.querySelectorAll('.taway-hide-el')[1];
 	check('1. "Read Less" sits after the LAST hidden element',
-		c1last.nextElementSibling === c1.querySelector('.tuckaway-toggle-less').parentElement);
+		c1last.nextElementSibling === c1.querySelector('.taway-toggle-less').parentElement);
 	check('1. each toggle sits in its own block wrapper, a direct child of the container',
-		qa('#case-basic .tuckaway-toggle').every(function (a) {
+		qa('#case-basic .taway-toggle').every(function (a) {
 			var w = a.parentElement;
-			return w.classList.contains('tuckaway-toggle-wrap') && w.parentElement === c1 && w.children.length === 1 &&
+			return w.classList.contains('taway-toggle-wrap') && w.parentElement === c1 && w.children.length === 1 &&
 				(w.hidden || getComputedStyle(w).display === 'block');
 		}));
-	check('1. hidden "Read Less" hides its wrapper too', c1.querySelector('.tuckaway-toggle-less').parentElement.hidden === true);
+	check('1. hidden "Read Less" hides its wrapper too', c1.querySelector('.taway-toggle-less').parentElement.hidden === true);
 	check('1. collapsed elements keep their original tag',
-		Array.prototype.every.call(c1.querySelectorAll('.tuckaway-hide-el'), function (el) { return el.tagName === 'P'; }));
+		Array.prototype.every.call(c1.querySelectorAll('.taway-hide-el'), function (el) { return el.tagName === 'P'; }));
 
 	// --- Case 2: mid-sentence split ---
 	var c2 = q('#case-midsentence');
@@ -164,44 +164,44 @@ window.addEventListener('DOMContentLoaded', function () {
 	var c2twin = c2orig.nextElementSibling;
 	// The twin is inserted directly after the original, then the "Read More"
 	// link goes in between, so walk forward to find the hide element.
-	var c2hidden = c2.querySelectorAll('.tuckaway-hide-el');
+	var c2hidden = c2.querySelectorAll('.taway-hide-el');
 	check('2. twin element + following paragraph both collapsed', c2hidden.length === 2, 'got ' + c2hidden.length);
 	var twin = c2hidden[0];
 	check('2. twin copied the class attribute', twin.classList.contains('styled'));
 	check('2. twin copied other attributes', twin.getAttribute('data-keep') === 'yes');
-	check('2. twin did NOT copy the id', !twin.hasAttribute('id') || twin.id.indexOf('tuckaway-collapse-') === 0);
+	check('2. twin did NOT copy the id', !twin.hasAttribute('id') || twin.id.indexOf('taway-collapse-') === 0);
 	check('2. twin holds the remainder text',
 		twin.textContent.trim() === 'Hidden remainder of the very same sentence.', JSON.stringify(twin.textContent));
-	check('2. original paragraph NOT marked empty', !c2orig.classList.contains('tuckaway-anchor-empty'));
+	check('2. original paragraph NOT marked empty', !c2orig.classList.contains('taway-anchor-empty'));
 
 	// --- Case 3: structural tags ---
 	var c3 = q('#case-list');
 	var ul = c3.querySelector('ul');
-	check('3. <ul> itself is NOT the collapse host', !ul.classList.contains('tuckaway-hide-el'));
+	check('3. <ul> itself is NOT the collapse host', !ul.classList.contains('taway-hide-el'));
 	check('3. <ul> is wrapped from the outside',
-		ul.parentElement.classList.contains('tuckaway-hide-el-inner') &&
-		ul.parentElement.parentElement.classList.contains('tuckaway-hide-el'));
+		ul.parentElement.classList.contains('taway-hide-el-inner') &&
+		ul.parentElement.parentElement.classList.contains('taway-hide-el'));
 	check('3. <li> are still direct children of <ul>',
 		ul.children.length === 2 && ul.children[0].tagName === 'LI');
 	var tbl = c3.querySelector('table');
 	check('3. <table> wrapped from the outside, <tr> untouched',
-		!tbl.classList.contains('tuckaway-hide-el') && tbl.querySelector('tbody > tr > td'));
+		!tbl.classList.contains('taway-hide-el') && tbl.querySelector('tbody > tr > td'));
 
 	// --- Case 4: nothing after ---
 	var c4 = q('#case-nothing-after');
 	check('4. no toggle added when there is nothing to hide',
-		c4.querySelectorAll('.tuckaway-toggle').length === 0, 'got ' + c4.querySelectorAll('.tuckaway-toggle').length);
+		c4.querySelectorAll('.taway-toggle').length === 0, 'got ' + c4.querySelectorAll('.taway-toggle').length);
 
 	// --- Case 5: inert / toggling ---
 	var c5 = q('#case-focusable');
-	var c5host = c5.querySelector('.tuckaway-hide-el');
+	var c5host = c5.querySelector('.taway-hide-el');
 	check('5. collapsed section starts inert', c5host.hasAttribute('inert'));
-	var c5more = c5.querySelector('.tuckaway-toggle-more');
-	var c5less = c5.querySelector('.tuckaway-toggle-less');
+	var c5more = c5.querySelector('.taway-toggle-more');
+	var c5less = c5.querySelector('.taway-toggle-less');
 	check('5. first collapsed element is focusable by script only (tabindex=-1)', c5host.getAttribute('tabindex') === '-1');
 	c5more.focus();
 	c5more.click();
-	check('5. after click: section open', c5host.classList.contains('tuckaway-is-open'));
+	check('5. after click: section open', c5host.classList.contains('taway-is-open'));
 	check('5. after click: focus moved to the start of the revealed text', document.activeElement === c5host,
 		'focus is on ' + document.activeElement.tagName);
 	check('5. after click: inert removed', !c5host.hasAttribute('inert'));
@@ -211,7 +211,7 @@ window.addEventListener('DOMContentLoaded', function () {
 		c5more.parentElement.hidden === true && c5less.parentElement.hidden === false);
 	c5less.focus();
 	c5less.click();
-	check('5. after collapse: section closed', !c5host.classList.contains('tuckaway-is-open'));
+	check('5. after collapse: section closed', !c5host.classList.contains('taway-is-open'));
 	check('5. after collapse: focus back on "Read More"', document.activeElement === c5more,
 		'focus is on ' + document.activeElement.tagName);
 	check('5. after collapse: inert restored', c5host.hasAttribute('inert'));
@@ -224,15 +224,15 @@ window.addEventListener('DOMContentLoaded', function () {
 	var c6layouts = c6.querySelectorAll('.layout');
 	check('6. container is NOT split or duplicated', c6layouts.length === 1, 'got ' + c6layouts.length);
 	var c6layout = c6layouts[0];
-	var c6hidden = c6layout.querySelectorAll('.tuckaway-hide-el');
+	var c6hidden = c6layout.querySelectorAll('.taway-hide-el');
 	check('6. both following paragraphs collapsed in place, as direct children',
 		c6hidden.length === 2 && Array.prototype.every.call(c6hidden, function (el) { return el.parentElement === c6layout && el.tagName === 'P'; }),
 		'got ' + c6hidden.length);
-	check('6. paragraph before the marker stays visible', !c6layout.children[0].classList.contains('tuckaway-hide-el'));
-	check('6. marker removed', c6.querySelectorAll('.tuckaway-marker').length === 0);
+	check('6. paragraph before the marker stays visible', !c6layout.children[0].classList.contains('taway-hide-el'));
+	check('6. marker removed', c6.querySelectorAll('.taway-marker').length === 0);
 	check('6. toggles sit inside the container, around the hidden paragraphs',
-		c6layout.children[1].classList.contains('tuckaway-toggle-wrap') &&
-		c6hidden[1].nextElementSibling === c6layout.querySelector('.tuckaway-toggle-less').parentElement);
+		c6layout.children[1].classList.contains('taway-toggle-wrap') &&
+		c6hidden[1].nextElementSibling === c6layout.querySelector('.taway-toggle-less').parentElement);
 
 	// --- Case 7: page-builder widget ---
 	var c7 = q('#case-widget');
@@ -240,28 +240,28 @@ window.addEventListener('DOMContentLoaded', function () {
 	check('7. text widget is NOT duplicated', c7widgets.length === 1, 'got ' + c7widgets.length);
 	var c7widget = c7widgets[0];
 	var c7button = c7.querySelector('.widget-button');
-	check('7. button widget after it is NOT hidden', !c7button.closest('.tuckaway-hide-el') && !c7button.classList.contains('tuckaway-hide-el'));
+	check('7. button widget after it is NOT hidden', !c7button.closest('.taway-hide-el') && !c7button.classList.contains('taway-hide-el'));
 	check('7. both toggles stay inside the text widget',
-		c7widget.querySelectorAll('.tuckaway-toggle').length === 2 && c7.querySelectorAll('.tuckaway-toggle').length === 2);
-	var c7hidden = c7widget.querySelectorAll('.tuckaway-hide-el');
+		c7widget.querySelectorAll('.taway-toggle').length === 2 && c7.querySelectorAll('.taway-toggle').length === 2);
+	var c7hidden = c7widget.querySelectorAll('.taway-hide-el');
 	check('7. trailing bare text collapsed as one block inside the widget',
 		c7hidden.length === 1 && c7hidden[0].parentElement === c7widget &&
 		c7hidden[0].textContent.trim() === 'Hidden bare text, still hidden.', JSON.stringify(c7hidden[0] && c7hidden[0].textContent));
 	check('7. visible text stays outside the collapsed block', c7widget.firstChild.nodeType === 3 && c7widget.firstChild.nodeValue === 'Visible bare text.');
 	check('7. revealed text does not open with an empty line',
-		c7hidden[0].querySelector('.tuckaway-hide-el-inner').firstChild.nodeName !== 'BR');
+		c7hidden[0].querySelector('.taway-hide-el-inner').firstChild.nodeName !== 'BR');
 
 	// --- Case 8: line breaks in one paragraph ---
 	var c8 = q('#case-linebreaks');
-	var c8twin = c8.querySelector('p.tuckaway-hide-el');
+	var c8twin = c8.querySelector('p.taway-hide-el');
 	check('8. paragraph split, twin holds the hidden line', !!c8twin && c8twin.textContent.trim() === 'Hidden line.');
 	check('8. revealed line does not open with an empty line',
-		c8twin && c8twin.querySelector('.tuckaway-hide-el-inner').firstChild.nodeName !== 'BR');
+		c8twin && c8twin.querySelector('.taway-hide-el-inner').firstChild.nodeName !== 'BR');
 
 	// --- Global ---
 	// --- Case 9: existing tabindex ---
 	check('9. an element\'s own tabindex is not overwritten',
-		q('#case-own-tabindex .tuckaway-hide-el').getAttribute('tabindex') === '0');
+		q('#case-own-tabindex .taway-hide-el').getAttribute('tabindex') === '0');
 
 	// --- Cases 10-12: inline-level and flex boxes are boxes, not text ---
 	[
@@ -274,10 +274,10 @@ window.addEventListener('DOMContentLoaded', function () {
 		var next = box.querySelector(c[3]);
 		check(c[0] + '. ' + c[2] + ' widget is NOT duplicated', widgets.length === 1, 'got ' + widgets.length);
 		check(c[0] + '. widget after the ' + c[2] + ' one is NOT hidden',
-			!next.closest('.tuckaway-hide-el') && !next.classList.contains('tuckaway-hide-el'));
+			!next.closest('.taway-hide-el') && !next.classList.contains('taway-hide-el'));
 		check(c[0] + '. both toggles stay inside the ' + c[2] + ' widget',
-			widgets[0].querySelectorAll('.tuckaway-toggle').length === 2 && box.querySelectorAll('.tuckaway-toggle').length === 2);
-		var hidden = widgets[0].querySelectorAll('.tuckaway-hide-el');
+			widgets[0].querySelectorAll('.taway-toggle').length === 2 && box.querySelectorAll('.taway-toggle').length === 2);
+		var hidden = widgets[0].querySelectorAll('.taway-hide-el');
 		check(c[0] + '. hidden text collapsed inside the ' + c[2] + ' widget',
 			hidden.length === 1 && hidden[0].textContent.trim() === 'Hidden bare text.',
 			JSON.stringify(hidden[0] && hidden[0].textContent));
@@ -287,14 +287,14 @@ window.addEventListener('DOMContentLoaded', function () {
 	var c13 = q('#case-inline-parent');
 	var c13strong = c13.querySelectorAll('strong');
 	check('13. inline parent split at the marker, hidden half collapsed',
-		c13strong.length === 2 && c13strong[1].classList.contains('tuckaway-hide-el') &&
+		c13strong.length === 2 && c13strong[1].classList.contains('taway-hide-el') &&
 		c13strong[1].textContent.trim() === 'hidden bold', 'got ' + c13strong.length + ' <strong>');
 
-	var ids = qa('.tuckaway-hide-el').map(function (el) { return el.id; });
+	var ids = qa('.taway-hide-el').map(function (el) { return el.id; });
 	check('global: every collapse host has an id', ids.every(Boolean));
 	check('global: all collapse ids are unique', new Set(ids).size === ids.length);
 	check('global: labels came from the config object',
-		q('.tuckaway-toggle-more').textContent === 'Read More' && q('.tuckaway-toggle-less').textContent === 'Read Less');
+		q('.taway-toggle-more').textContent === 'Read More' && q('.taway-toggle-less').textContent === 'Read Less');
 
 	var failed = out.filter(function (l) { return l.indexOf('FAIL') === 0 || l.charAt(0) === '✗'; });
 	var el = document.getElementById('results');

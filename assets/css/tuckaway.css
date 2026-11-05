@@ -7,7 +7,7 @@
  * from the theme or page builder intact whenever it is visible, while
  * still fully collapsing it (including its own margin) while hidden.
  *
- * Every class name is prefixed with "tuckaway-", the plugin's slug,
+ * Every class name is prefixed with "taway-" (short for Tuckaway),
  * rather than being named for what it does, because generic names like
  * .wrapper, .toggle, or .collapse are common in themes and other
  * plugins; Bootstrap based themes in particular use .collapse
@@ -29,28 +29,28 @@
  * @package Tuckaway
  */
 
-.tuckaway-toggle {
+.taway-toggle {
 	display: inline-block;
 	margin-top: 0.75em;
 	cursor: pointer;
 }
 
-.tuckaway-toggle[hidden],
-.tuckaway-toggle-wrap[hidden] {
+.taway-toggle[hidden],
+.taway-toggle-wrap[hidden] {
 	display: none;
 }
 
-.tuckaway-hide-el {
+.taway-hide-el {
 	display: grid;
 	grid-template-rows: 0fr;
 	transition: grid-template-rows 0.3s ease;
 }
 
-.tuckaway-hide-el.tuckaway-is-open {
+.taway-hide-el.taway-is-open {
 	grid-template-rows: 1fr;
 }
 
-.tuckaway-hide-el:not(.tuckaway-is-open) {
+.taway-hide-el:not(.taway-is-open) {
 	/* Collapses this element's own margin only while hidden, so a
 	   closed section leaves no stray blank gap. The moment it opens
 	   this rule stops matching and the element's normal margin
@@ -59,7 +59,7 @@
 	margin-block: 0;
 }
 
-.tuckaway-hide-el[tabindex="-1"]:focus {
+.taway-hide-el[tabindex="-1"]:focus {
 	/* Focus lands here only from script, when the section opens, so a
 	   keyboard user carries on reading from the right place. The text
 	   is not interactive, so a focus ring around it would only look
@@ -67,18 +67,18 @@
 	outline: none;
 }
 
-.tuckaway-hide-el-inner {
+.taway-hide-el-inner {
 	overflow: hidden;
 	min-height: 0;
 }
 
-.tuckaway-anchor-empty {
+.taway-anchor-empty {
 	/* The paragraph that held the [readmore] marker itself; once the
 	   marker is removed it has nothing left to show. */
 	display: none;
 }
 
-.tuckaway-marker {
+.taway-marker {
 	display: none;
 }
 
@@ -89,7 +89,7 @@
  */
 @media (prefers-reduced-motion: reduce) {
 
-	.tuckaway-hide-el {
+	.taway-hide-el {
 		transition: none;
 	}
 }
