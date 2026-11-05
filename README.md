@@ -1,4 +1,4 @@
-# Simple Read More
+# Tuckaway
 
 A WordPress plugin that splits any content into a visible part and a collapsible "Read More / Read Less" part, using a single shortcode. No settings screen, no database writes, no dependencies, no external requests — that's a description of the mechanism, not a marketing line. There is genuinely nothing else to configure.
 
@@ -10,7 +10,9 @@ Built for the site owner who wants it to just work: install, activate, type a sh
 
 Type `[readmore]` on its own line anywhere in your content. Everything after that point starts collapsed behind a "Read More" link. Clicking it expands the content and places a "Read Less" link at the *end* of the revealed text, rather than back where the reader clicked.
 
-For widgets that do not process shortcodes, paste `<span class="srm-marker"></span>` instead. It behaves identically.
+If another plugin on the site also registers `[readmore]`, type `[tuckaway]` instead; it does exactly the same thing.
+
+For widgets that do not process shortcodes, paste `<span class="tuckaway-marker"></span>` instead. It behaves identically.
 
 The shortcode renders nothing but that empty marker span. All splitting, wrapping, and animation happens client-side, which is what keeps the plugin editor-agnostic.
 
@@ -18,23 +20,23 @@ The shortcode renders nothing but that empty marker span. All splitting, wrappin
 
 The obvious implementation creates a new container and moves the hidden paragraphs into it. That breaks typography on a meaningful number of sites, because theme and page-builder CSS frequently targets paragraphs by their position in the markup, so a relocated paragraph stops matching its own rules.
 
-This plugin never relocates an element out of its original parent. Each element that needs to hide becomes a self-contained collapsible unit *in place*, keeping its tag, classes, id, and position. Lists and tables, whose children must remain direct children, are wrapped from the outside instead. The full reasoning is in the architecture note at the top of [`includes/class-simple-read-more-assets.php`](includes/class-simple-read-more-assets.php).
+This plugin never relocates an element out of its original parent. Each element that needs to hide becomes a self-contained collapsible unit *in place*, keeping its tag, classes, id, and position. Lists and tables, whose children must remain direct children, are wrapped from the outside instead. The full reasoning is in the architecture note at the top of [`includes/class-tuckaway-assets.php`](includes/class-tuckaway-assets.php).
 
 ## Repository layout
 
 ```
-simple-read-more/
-├── simple-read-more.php          Plugin header, constants, bootstrap
+tuckaway/
+├── tuckaway.php          Plugin header, constants, bootstrap
 ├── readme.txt                    WordPress.org listing (the real docs)
 ├── LICENSE                       GPL-2.0
 ├── includes/
-│   ├── class-simple-read-more.php            Orchestrator
-│   ├── class-simple-read-more-shortcode.php  [readmore]
-│   └── class-simple-read-more-assets.php     Enqueue + labels
+│   ├── class-tuckaway.php            Orchestrator
+│   ├── class-tuckaway-shortcode.php  [readmore]
+│   └── class-tuckaway-assets.php     Enqueue + labels
 ├── assets/
-│   ├── css/simple-read-more.css  Layout and collapse animation
-│   └── js/simple-read-more.js    All DOM behaviour
-├── languages/simple-read-more.pot
+│   ├── css/tuckaway.css  Layout and collapse animation
+│   └── js/tuckaway.js    All DOM behaviour
+├── languages/tuckaway.pot
 ├── docs/usage-manual.html        Standalone illustrated manual
 ├── tests/manual/                 Browser DOM test harness
 ├── bin/                          Build + test-server scripts
@@ -47,7 +49,7 @@ simple-read-more/
 
 ```php
 // Relabel every toggle on the site.
-add_filter( 'simple_read_more_labels', function ( $labels ) {
+add_filter( 'tuckaway_labels', function ( $labels ) {
 	$labels['more'] = 'Show More';
 	$labels['less'] = 'Show Less';
 	return $labels;
@@ -55,21 +57,21 @@ add_filter( 'simple_read_more_labels', function ( $labels ) {
 
 // Load the CSS and JS on every page, for a marker pasted somewhere
 // the plugin cannot see it (see "Where it loads" below).
-add_filter( 'simple_read_more_load_everywhere', '__return_true' );
+add_filter( 'tuckaway_load_everywhere', '__return_true' );
 ```
 
 ### Where it loads
 
 The CSS and JS load only on pages that use the plugin. The shortcode
 requests them when it renders, so any editor or page builder that runs
-shortcodes is covered. A hand-pasted `srm-marker` span runs no plugin
+shortcodes is covered. A hand-pasted `tuckaway-marker` span runs no plugin
 code, so the rendered output of post content, blocks (including block
 templates and block widgets), classic text widgets, and Elementor
 widgets is checked for it instead. A marker anywhere else, such as a
 raw HTML field in another page builder, needs the
-`simple_read_more_load_everywhere` filter above.
+`tuckaway_load_everywhere` filter above.
 
-The constants `SIMPLE_READ_MORE_LABEL_MORE` and `SIMPLE_READ_MORE_LABEL_LESS` can also be defined in `wp-config.php`.
+The constants `TUCKAWAY_LABEL_MORE` and `TUCKAWAY_LABEL_LESS` can also be defined in `wp-config.php`.
 
 ## Development
 
@@ -77,7 +79,7 @@ The constants `SIMPLE_READ_MORE_LABEL_MORE` and `SIMPLE_READ_MORE_LABEL_LESS` ca
 composer install
 composer run lint        # PHPCS against WordPress Coding Standards
 composer run lint:fix    # PHPCBF autofix
-composer run build       # produces build/simple-read-more-<version>.zip
+composer run build       # produces build/tuckaway-<version>.zip
 ```
 
 On Windows without Git Bash, use the PowerShell build script instead:
@@ -97,7 +99,7 @@ CI runs PHP syntax linting on 7.2 and 8.4, PHPCS, and the official [Plugin Check
 
 ### Releasing
 
-1. Bump the version in **both** `simple-read-more.php` (`Version:`) and `readme.txt` (`Stable tag:`). The build script refuses to run if they disagree, because WordPress.org serves whatever `Stable tag` points at.
+1. Bump the version in **both** `tuckaway.php` (`Version:`) and `readme.txt` (`Stable tag:`). The build script refuses to run if they disagree, because WordPress.org serves whatever `Stable tag` points at.
 2. Add a `== Changelog ==` entry and an `== Upgrade Notice ==` entry in `readme.txt`.
 3. Run `composer run build` and test the resulting zip on a clean install.
 4. Tag the release, then commit to the WordPress.org SVN `trunk/` and copy to `tags/<version>/`.

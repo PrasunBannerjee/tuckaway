@@ -1,4 +1,4 @@
-=== Simple Read More ===
+=== Tuckaway – Collapsible Read More Content ===
 Contributors: prasunbannerjee
 Tags: read more, read less, expand, collapse, shortcode
 Requires at least: 5.8
@@ -41,7 +41,7 @@ This plugin never relocates your elements. Each one that needs to hide becomes a
 
 = Works with =
 
-The block editor, the Classic Editor, and page builders, including Elementor's free Text Editor widget. For any widget that does not process shortcodes, such as a raw HTML widget, paste `<span class="srm-marker"></span>` instead; it behaves identically.
+The block editor, the Classic Editor, and page builders, including Elementor's free Text Editor widget. For any widget that does not process shortcodes, such as a raw HTML widget, paste `<span class="tuckaway-marker"></span>` instead; it behaves identically.
 
 Elementor is a trademark of Elementor Ltd. This plugin is an independent project and is not affiliated with, endorsed by, or sponsored by them.
 
@@ -49,25 +49,25 @@ Elementor is a trademark of Elementor Ltd. This plugin is an independent project
 
 The one thing worth changing — the link wording — lives in a filter rather than a screen, so it survives updates instead of being wiped by them:
 
-`add_filter( 'simple_read_more_labels', function ( $labels ) {
+`add_filter( 'tuckaway_labels', function ( $labels ) {
 	$labels['more'] = 'Show More';
 	$labels['less'] = 'Show Less';
 	return $labels;
 } );`
 
-A second filter, `simple_read_more_load_everywhere`, loads the CSS and JS on every page. You'll only need it if you paste the marker span somewhere the plugin can't see it; see the FAQ below.
+A second filter, `tuckaway_load_everywhere`, loads the CSS and JS on every page. You'll only need it if you paste the marker span somewhere the plugin can't see it; see the FAQ below.
 
-Development happens in the open at [github.com/PrasunBannerjee/simple-read-more](https://github.com/PrasunBannerjee/simple-read-more).
+Development happens in the open at [github.com/PrasunBannerjee/tuckaway](https://github.com/PrasunBannerjee/tuckaway).
 
 == Installation ==
 
 1. In your WordPress admin, go to **Plugins → Add New Plugin**.
-2. Search for **Simple Read More**, then click **Install Now** and **Activate**.
+2. Search for **Tuckaway**, then click **Install Now** and **Activate**.
 3. Type `[readmore]` on its own line anywhere in your content, at the point you want the split.
 
 That's it. There's no step 4 — no settings page opens, because none exists.
 
-To install manually instead, upload the `simple-read-more` folder to `/wp-content/plugins/`, then activate it from the **Plugins** screen.
+To install manually instead, upload the `tuckaway` folder to `/wp-content/plugins/`, then activate it from the **Plugins** screen.
 
 == Frequently Asked Questions ==
 
@@ -81,7 +81,11 @@ There isn't one. The plugin has exactly one behavior, so there's nothing to choo
 
 = Nothing happens, and `[readmore]` shows up literally on the page =
 
-The widget you are using does not process shortcodes. Paste `<span class="srm-marker"></span>` instead, which does exactly the same thing.
+The widget you are using does not process shortcodes. Paste `<span class="tuckaway-marker"></span>` instead, which does exactly the same thing.
+
+= Another plugin also uses `[readmore]` =
+
+Type `[tuckaway]` instead. It does exactly the same thing, and because it carries this plugin's own name, no other plugin will claim it.
 
 = Can I use more than one on the same page? =
 
@@ -91,19 +95,19 @@ Yes, but put each one in its own text block or widget. Two markers inside a sing
 
 Add this to your child theme's `functions.php`:
 
-`add_filter( 'simple_read_more_labels', function ( $labels ) {
+`add_filter( 'tuckaway_labels', function ( $labels ) {
 	$labels['more'] = 'Show More';
 	$labels['less'] = 'Show Less';
 	return $labels;
 } );`
 
-You can also define `SIMPLE_READ_MORE_LABEL_MORE` and `SIMPLE_READ_MORE_LABEL_LESS` in `wp-config.php`. Both approaches survive plugin updates; editing the plugin file directly does not.
+You can also define `TUCKAWAY_LABEL_MORE` and `TUCKAWAY_LABEL_LESS` in `wp-config.php`. Both approaches survive plugin updates; editing the plugin file directly does not.
 
 = How do I restyle the "Read More" link? =
 
 By design, the plugin sets no color, underline, or font on the toggles, so they inherit your theme's existing link styling automatically. To override that, add your own rule in **Appearance → Customize → Additional CSS**:
 
-`.srm-toggle {
+`.tuckaway-toggle {
 	color: #2563eb;
 	text-decoration: none;
 }`
@@ -112,7 +116,7 @@ By design, the plugin sets no color, underline, or font on the toggles, so they 
 
 Target the same class from Additional CSS:
 
-`.srm-hide-el {
+`.tuckaway-hide-el {
 	transition: grid-template-rows 0.6s ease-in-out;
 }`
 
@@ -120,7 +124,7 @@ Target the same class from Additional CSS:
 
 The plugin loads its CSS and JS only on pages that use it. It spots the shortcode anywhere, and the pasted span in post content, blocks, widgets, and Elementor, but not inside every page builder's raw HTML field. If yours is one it can't see, add this to your child theme's `functions.php` to load the files on every page:
 
-`add_filter( 'simple_read_more_load_everywhere', '__return_true' );`
+`add_filter( 'tuckaway_load_everywhere', '__return_true' );`
 
 Nothing breaks in the meantime: the content simply stays fully visible.
 

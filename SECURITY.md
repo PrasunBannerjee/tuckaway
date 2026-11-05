@@ -14,7 +14,7 @@ patched; update to the current release to get a fix.
 Please do not open a public issue for a security problem.
 
 Report it privately through GitHub instead: open the
-[Security tab](https://github.com/PrasunBannerjee/simple-read-more/security)
+[Security tab](https://github.com/PrasunBannerjee/tuckaway/security)
 of this repository and choose **Report a vulnerability**. Only the
 maintainer can see the report.
 

@@ -2,7 +2,7 @@
 /**
  * Front-end asset registration.
  *
- * @package SimpleReadMore
+ * @package Tuckaway
  */
 
 // Block direct access.
@@ -62,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-final class Simple_Read_More_Assets {
+final class Tuckaway_Assets {
 
 	/**
 	 * Shared handle for both the stylesheet and the script.
@@ -70,7 +70,7 @@ final class Simple_Read_More_Assets {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const HANDLE = 'simple-read-more';
+	const HANDLE = 'tuckaway';
 
 	/**
 	 * Whether something on the current page has asked for the assets.
@@ -87,13 +87,13 @@ final class Simple_Read_More_Assets {
 	 * never site wide. Two things count as use:
 	 *
 	 * 1. The [readmore] shortcode rendering. The shortcode calls
-	 *    {@see Simple_Read_More_Assets::request()} itself, so this
+	 *    {@see Tuckaway_Assets::request()} itself, so this
 	 *    works wherever shortcodes run, including page builders that
 	 *    keep their content in post meta rather than post_content.
 	 *    That is also why detection happens while content renders,
 	 *    rather than by inspecting post_content up front with
 	 *    has_shortcode(), which misses builder pages.
-	 * 2. A hand-pasted `srm-marker` span, which runs no plugin code of
+	 * 2. A hand-pasted `tuckaway-marker` span, which runs no plugin code of
 	 *    its own. A plain substring check on the rendered output of the
 	 *    usual places such a span ends up catches it: post content,
 	 *    blocks (which also covers block templates and block widgets),
@@ -102,7 +102,7 @@ final class Simple_Read_More_Assets {
 	 *    whether or not this plugin is active.
 	 *
 	 * Anywhere else, a site can load the assets on every view with the
-	 * `simple_read_more_load_everywhere` filter.
+	 * `tuckaway_load_everywhere` filter.
 	 *
 	 * @since 1.0.0
 	 *
@@ -156,7 +156,7 @@ final class Simple_Read_More_Assets {
 	 * @return mixed The same output.
 	 */
 	public static function detect_marker( $content ) {
-		if ( ! self::$is_needed && is_string( $content ) && false !== strpos( $content, Simple_Read_More_Shortcode::MARKER_CLASS ) ) {
+		if ( ! self::$is_needed && is_string( $content ) && false !== strpos( $content, Tuckaway_Shortcode::MARKER_CLASS ) ) {
 			self::request();
 		}
 
@@ -184,7 +184,7 @@ final class Simple_Read_More_Assets {
 		 *
 		 * @param bool $load_everywhere Whether to load on every view. Default false.
 		 */
-		if ( apply_filters( 'simple_read_more_load_everywhere', false ) ) {
+		if ( apply_filters( 'tuckaway_load_everywhere', false ) ) {
 			self::$is_needed = true;
 		}
 
@@ -207,9 +207,9 @@ final class Simple_Read_More_Assets {
 
 		wp_enqueue_style(
 			self::HANDLE,
-			SIMPLE_READ_MORE_URL . 'assets/css/simple-read-more.css',
+			TUCKAWAY_URL . 'assets/css/tuckaway.css',
 			array(),
-			self::asset_version( 'assets/css/simple-read-more.css' )
+			self::asset_version( 'assets/css/tuckaway.css' )
 		);
 
 		/*
@@ -222,9 +222,9 @@ final class Simple_Read_More_Assets {
 		 */
 		wp_enqueue_script(
 			self::HANDLE,
-			SIMPLE_READ_MORE_URL . 'assets/js/simple-read-more.js',
+			TUCKAWAY_URL . 'assets/js/tuckaway.js',
 			array(),
-			self::asset_version( 'assets/js/simple-read-more.js' ),
+			self::asset_version( 'assets/js/tuckaway.js' ),
 			array(
 				'in_footer' => true,
 				'strategy'  => 'defer',
@@ -235,7 +235,7 @@ final class Simple_Read_More_Assets {
 
 		wp_add_inline_script(
 			self::HANDLE,
-			'window.simpleReadMoreConfig = ' . wp_json_encode(
+			'window.tuckawayConfig = ' . wp_json_encode(
 				array(
 					'labelMore' => $labels['more'],
 					'labelLess' => $labels['less'],
@@ -262,14 +262,14 @@ final class Simple_Read_More_Assets {
 	 * @return array{more:string,less:string} Resolved labels.
 	 */
 	private static function get_labels() {
-		$more = SIMPLE_READ_MORE_LABEL_MORE;
-		$less = SIMPLE_READ_MORE_LABEL_LESS;
+		$more = TUCKAWAY_LABEL_MORE;
+		$less = TUCKAWAY_LABEL_LESS;
 
 		if ( 'Read More' === $more ) {
-			$more = __( 'Read More', 'simple-read-more' );
+			$more = __( 'Read More', 'tuckaway' );
 		}
 		if ( 'Read Less' === $less ) {
-			$less = __( 'Read Less', 'simple-read-more' );
+			$less = __( 'Read Less', 'tuckaway' );
 		}
 
 		$labels = array(
@@ -286,7 +286,7 @@ final class Simple_Read_More_Assets {
 		 *
 		 * @param array{more:string,less:string} $labels Resolved labels.
 		 */
-		$labels = apply_filters( 'simple_read_more_labels', $labels );
+		$labels = apply_filters( 'tuckaway_labels', $labels );
 
 		return array(
 			'more' => isset( $labels['more'] ) ? (string) $labels['more'] : $more,
@@ -310,15 +310,15 @@ final class Simple_Read_More_Assets {
 	 * @return string Version string.
 	 */
 	private static function asset_version( $relative_path ) {
-		$absolute_path = SIMPLE_READ_MORE_PATH . $relative_path;
+		$absolute_path = TUCKAWAY_PATH . $relative_path;
 
 		if ( file_exists( $absolute_path ) ) {
 			$modified_time = filemtime( $absolute_path );
 			if ( $modified_time ) {
-				return SIMPLE_READ_MORE_VERSION . '.' . $modified_time;
+				return TUCKAWAY_VERSION . '.' . $modified_time;
 			}
 		}
 
-		return SIMPLE_READ_MORE_VERSION;
+		return TUCKAWAY_VERSION;
 	}
 }

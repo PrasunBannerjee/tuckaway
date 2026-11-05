@@ -2,7 +2,7 @@
 /**
  * Plugin orchestrator.
  *
- * @package SimpleReadMore
+ * @package Tuckaway
  */
 
 // Block direct access.
@@ -28,13 +28,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-final class Simple_Read_More {
+final class Tuckaway {
 
 	/**
 	 * Single shared instance.
 	 *
 	 * @since 1.0.0
-	 * @var Simple_Read_More|null
+	 * @var Tuckaway|null
 	 */
 	private static $instance = null;
 
@@ -47,7 +47,7 @@ final class Simple_Read_More {
 	private $has_run = false;
 
 	/**
-	 * Private constructor; use {@see Simple_Read_More::instance()}.
+	 * Private constructor; use {@see Tuckaway::instance()}.
 	 *
 	 * @since 1.0.0
 	 */
@@ -58,7 +58,7 @@ final class Simple_Read_More {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return Simple_Read_More
+	 * @return Tuckaway
 	 */
 	public static function instance() {
 		if ( null === self::$instance ) {
@@ -81,7 +81,7 @@ final class Simple_Read_More {
 		}
 		$this->has_run = true;
 
-		Simple_Read_More_Shortcode::register();
-		Simple_Read_More_Assets::register();
+		Tuckaway_Shortcode::register();
+		Tuckaway_Assets::register();
 	}
 }

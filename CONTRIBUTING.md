@@ -8,14 +8,14 @@ dependency is almost certainly out of scope.
 ## Getting set up
 
 ```bash
-git clone https://github.com/PrasunBannerjee/simple-read-more.git
-cd simple-read-more
+git clone https://github.com/PrasunBannerjee/tuckaway.git
+cd tuckaway
 composer install
 ```
 
 Symlink or copy the folder into a local WordPress install's
 `wp-content/plugins/` directory. The folder name must stay
-`simple-read-more`.
+`tuckaway`.
 
 ## Before opening a pull request
 
@@ -32,20 +32,20 @@ if you are touching plugin headers, escaping, or enqueues.
 
 ## Things that are easy to get wrong here
 
-- **Do not rename CSS classes.** `srm-marker` in particular is
+- **Do not rename CSS classes.** `tuckaway-marker` in particular is
   public API: the documentation tells users to paste
-  `<span class="srm-marker"></span>` into raw HTML widgets. Renaming
+  `<span class="tuckaway-marker"></span>` into raw HTML widgets. Renaming
   it silently breaks every page doing that.
 - **Do not move elements out of their parent in the JS.** The whole
   point of this design is that elements collapse in place. See the
   architecture note in
-  [`includes/class-simple-read-more-assets.php`](includes/class-simple-read-more-assets.php)
-  before changing anything in `assets/js/simple-read-more.js`.
-- **Do not add styling to `.srm-toggle`.** Color, underline, and
+  [`includes/class-tuckaway-assets.php`](includes/class-tuckaway-assets.php)
+  before changing anything in `assets/js/tuckaway.js`.
+- **Do not add styling to `.tuckaway-toggle`.** Color, underline, and
   font are deliberately left unset so the toggles inherit the site's own
   link styling. Setting them here starts fights with themes.
 - **Keep the version in three places in sync**: the `Version:` header in
-  `simple-read-more.php`, `Stable tag:` in `readme.txt`, and the
+  `tuckaway.php`, `Stable tag:` in `readme.txt`, and the
   changelog entries. The build script enforces the first two.
 
 ## Tests
@@ -74,7 +74,7 @@ by hand:
 
 - `[readmore]` alone on its own line, in the block editor.
 - The same, in a Classic Editor text block.
-- `<span class="srm-marker"></span>` inside a raw HTML block.
+- `<span class="tuckaway-marker"></span>` inside a raw HTML block.
 - A marker followed by a bulleted list, a numbered list, and a table.
 - A marker placed mid-sentence rather than on its own line.
 - Keyboard only: Tab to the toggle, activate with Enter, then with

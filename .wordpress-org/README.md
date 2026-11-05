@@ -10,7 +10,7 @@ what the directory listing page renders and previews from.
 `assets/icon-256x256.png`, `assets/icon-128x128.png`,
 `assets/banner-772x250.png`, and `assets/banner-1544x500.png` in this
 folder are the real, final files. Commit them as-is to
-`https://plugins.svn.wordpress.org/simple-read-more/assets/` when the
+`https://plugins.svn.wordpress.org/tuckaway/assets/` when the
 plugin is submitted.
 
 | File | Size | Source |
@@ -80,7 +80,7 @@ Two things are needed for the public **Preview** button to appear:
    plugin's **Advanced** view. Before that, only committers see it, as a
    **Test Preview** button.
 
-The blueprint installs the plugin by its `simple-read-more` slug from
+The blueprint installs the plugin by its `tuckaway` slug from
 wordpress.org, so it only works once the plugin is approved and live.
 
 ## Constraints

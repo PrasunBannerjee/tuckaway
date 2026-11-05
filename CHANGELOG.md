@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Simple Read More are documented here. The
+All notable changes to Tuckaway are documented here. The
 user-facing copy lives in the `== Changelog ==` section of
 [`readme.txt`](readme.txt), which is what WordPress.org renders; keep
 the two in sync when releasing.
@@ -14,8 +14,9 @@ Initial release.
 ### Features
 
 - `[readmore]` shortcode that splits content into a visible part and a
-  collapsible part, plus an equivalent `srm-marker` span for widgets
-  that do not process shortcodes.
+  collapsible part, plus an equivalent `tuckaway-marker` span for widgets
+  that do not process shortcodes. `[tuckaway]` does the same thing, for
+  sites where another plugin has claimed `[readmore]`.
 - "Read Less" is placed at the end of the revealed content rather than
   back where "Read More" was, so the collapse control sits where the
   reader's eyes land.
@@ -31,11 +32,11 @@ Initial release.
   content. Focus moves to the start of the revealed text on open and back
   to "Read More" on close, so keyboard users never lose their place. The
   animation is skipped under `prefers-reduced-motion`.
-- Labels are changeable via the `simple_read_more_labels` filter or the
-  `SIMPLE_READ_MORE_LABEL_MORE` / `SIMPLE_READ_MORE_LABEL_LESS`
+- Labels are changeable via the `tuckaway_labels` filter or the
+  `TUCKAWAY_LABEL_MORE` / `TUCKAWAY_LABEL_LESS`
   constants.
 - The CSS and JS load only on pages that use the shortcode or a marker
-  the plugin can detect, with a `simple_read_more_load_everywhere`
+  the plugin can detect, with a `tuckaway_load_everywhere`
   filter to load them on every page instead.
 - Translation-ready, with a `.pot` under `languages/`.
 - Stores nothing: no options, tables, post meta, cron events, or

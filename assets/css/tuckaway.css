@@ -1,5 +1,5 @@
 /**
- * Simple Read More — front-end styles.
+ * Tuckaway — front-end styles.
  *
  * Each hidden element animates its OWN height via a CSS grid row
  * (0fr -> 1fr), rather than one shared wrapper animating many
@@ -7,7 +7,7 @@
  * from the theme or page builder intact whenever it is visible, while
  * still fully collapsing it (including its own margin) while hidden.
  *
- * Every class name is prefixed with "srm-" (for Simple Read More)
+ * Every class name is prefixed with "tuckaway-", the plugin's slug,
  * rather than being named for what it does, because generic names like
  * .wrapper, .toggle, or .collapse are common in themes and other
  * plugins; Bootstrap based themes in particular use .collapse
@@ -26,31 +26,31 @@
  * own link styling. The rules below only handle layout (spacing,
  * show/hide), never appearance.
  *
- * @package SimpleReadMore
+ * @package Tuckaway
  */
 
-.srm-toggle {
+.tuckaway-toggle {
 	display: inline-block;
 	margin-top: 0.75em;
 	cursor: pointer;
 }
 
-.srm-toggle[hidden],
-.srm-toggle-wrap[hidden] {
+.tuckaway-toggle[hidden],
+.tuckaway-toggle-wrap[hidden] {
 	display: none;
 }
 
-.srm-hide-el {
+.tuckaway-hide-el {
 	display: grid;
 	grid-template-rows: 0fr;
 	transition: grid-template-rows 0.3s ease;
 }
 
-.srm-hide-el.srm-is-open {
+.tuckaway-hide-el.tuckaway-is-open {
 	grid-template-rows: 1fr;
 }
 
-.srm-hide-el:not(.srm-is-open) {
+.tuckaway-hide-el:not(.tuckaway-is-open) {
 	/* Collapses this element's own margin only while hidden, so a
 	   closed section leaves no stray blank gap. The moment it opens
 	   this rule stops matching and the element's normal margin
@@ -59,7 +59,7 @@
 	margin-block: 0;
 }
 
-.srm-hide-el[tabindex="-1"]:focus {
+.tuckaway-hide-el[tabindex="-1"]:focus {
 	/* Focus lands here only from script, when the section opens, so a
 	   keyboard user carries on reading from the right place. The text
 	   is not interactive, so a focus ring around it would only look
@@ -67,18 +67,18 @@
 	outline: none;
 }
 
-.srm-hide-el-inner {
+.tuckaway-hide-el-inner {
 	overflow: hidden;
 	min-height: 0;
 }
 
-.srm-anchor-empty {
+.tuckaway-anchor-empty {
 	/* The paragraph that held the [readmore] marker itself; once the
 	   marker is removed it has nothing left to show. */
 	display: none;
 }
 
-.srm-marker {
+.tuckaway-marker {
 	display: none;
 }
 
@@ -89,7 +89,7 @@
  */
 @media (prefers-reduced-motion: reduce) {
 
-	.srm-hide-el {
+	.tuckaway-hide-el {
 		transition: none;
 	}
 }

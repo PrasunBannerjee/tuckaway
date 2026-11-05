@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple Read More — Guide</title>
+<title>Tuckaway — Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -374,7 +374,7 @@
 
 <header class="masthead">
 	<div class="wrap wrap-wide masthead-inner">
-		<svg class="masthead-mark" viewBox="850 855 1300 1245" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simple Read More">
+		<svg class="masthead-mark" viewBox="850 855 1300 1245" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tuckaway">
 			<path fill="#1C1C1E" d="M1085.11 919.15l829.78 0c24.67,0 44.68,20.01 44.68,44.68l0 57.44c0,24.68 -20.01,44.69 -44.68,44.69l-829.78 0c-24.67,0 -44.68,-20.01 -44.68,-44.69l-0.01 -57.44c0.01,-24.67 20.02,-44.68 44.69,-44.68z"/>
 			<path fill="#1C1C1E" d="M1085.11 1155.32l242.55 0c24.67,0 44.68,20.01 44.68,44.68l0 57.45c0,24.67 -20.01,44.68 -44.68,44.68l-242.55 0c-24.67,0 -44.68,-20.01 -44.68,-44.68l-0.01 -57.45c0.01,-24.67 20.02,-44.68 44.69,-44.68z"/>
 			<path fill="#1C1C1E" d="M1085.11 1391.49l829.78 0c24.67,0 44.68,20.01 44.68,44.68l0 57.44c0,24.68 -20.01,44.68 -44.68,44.68l-829.78 0.01c-24.67,-0.01 -44.68,-20.01 -44.68,-44.69l-0.01 -57.44c0.01,-24.67 20.02,-44.68 44.69,-44.68z"/>
@@ -382,7 +382,7 @@
 			<path fill="#1C1C1E" fill-opacity="0.45" d="M1672.34 1697.87l242.55 0c24.67,0 44.68,20.01 44.68,44.68l0 57.45c0,24.67 -20.01,44.68 -44.68,44.68l-242.55 0c-24.67,0 -44.68,-20.01 -44.68,-44.68l0 -57.45c0,-24.67 20.01,-44.68 44.68,-44.68z"/>
 			<path fill="#1C1C1E" fill-opacity="0.45" d="M1085.11 1934.04l829.78 0c24.67,0 44.68,20.01 44.68,44.68l0 57.45c0,24.67 -20.01,44.68 -44.68,44.68l-829.78 0c-24.67,0 -44.68,-20.01 -44.68,-44.68l-0.01 -57.45c0.01,-24.67 20.02,-44.68 44.69,-44.68z"/>
 		</svg>
-		<span class="masthead-name">Simple Read More</span>
+		<span class="masthead-name">Tuckaway</span>
 		<span class="masthead-tag">Guide</span>
 	</div>
 </header>
@@ -417,7 +417,7 @@
 				<span class="step-num">01</span>
 				<div class="step-body">
 					<h3>Install and activate</h3>
-					<p>Plugins → Add New Plugin → search "Simple Read More" → Install Now → Activate. Ordinary WordPress, nothing special.</p>
+					<p>Plugins → Add New Plugin → search "Tuckaway" → Install Now → Activate. Ordinary WordPress, nothing special.</p>
 				</div>
 			</li>
 			<li class="step">
@@ -461,7 +461,7 @@
 			<summary>Using it somewhere shortcodes don't run</summary>
 			<div class="detail-body">
 				<p>Most widgets and blocks process <code>[readmore]</code> normally. A few raw-HTML contexts don't. In those, paste this instead — it behaves identically:</p>
-				<pre><code>&lt;span class="srm-marker"&gt;&lt;/span&gt;</code></pre>
+				<pre><code>&lt;span class="tuckaway-marker"&gt;&lt;/span&gt;</code></pre>
 				<p>The span is intentionally empty; nothing needs to go inside it.</p>
 				<div class="note warn"><strong>One marker per block.</strong> Two separate Read More sections need two separate text blocks. A second marker inside content that's already collapsed won't split independently.</div>
 				<h4>Two edge cases, handled automatically</h4>
@@ -493,26 +493,26 @@
 
 				<h4>Link wording</h4>
 				<p>In a child theme's <code>functions.php</code>:</p>
-				<pre><code>add_filter( 'simple_read_more_labels', function ( $labels ) {
+				<pre><code>add_filter( 'tuckaway_labels', function ( $labels ) {
 	$labels['more'] = 'Show More';
 	$labels['less'] = 'Show Less';
 	return $labels;
 } );</code></pre>
 				<p>Or, without touching theme files, in <code>wp-config.php</code>:</p>
-				<pre><code>define( 'SIMPLE_READ_MORE_LABEL_MORE', 'Show More' );
-define( 'SIMPLE_READ_MORE_LABEL_LESS', 'Show Less' );</code></pre>
-				<p>Either survives plugin updates. Editing <code>simple-read-more.php</code> directly also works, but that edit is erased the next time the plugin updates.</p>
+				<pre><code>define( 'TUCKAWAY_LABEL_MORE', 'Show More' );
+define( 'TUCKAWAY_LABEL_LESS', 'Show Less' );</code></pre>
+				<p>Either survives plugin updates. Editing <code>tuckaway.php</code> directly also works, but that edit is erased the next time the plugin updates.</p>
 
 				<h4>Animation speed</h4>
 				<p>In <strong>Appearance → Customize → Additional CSS</strong>:</p>
-				<pre><code>.srm-hide-el {
+				<pre><code>.tuckaway-hide-el {
 	transition: grid-template-rows 0.6s ease-in-out;
 }</code></pre>
 				<p>Smaller number, faster reveal. <code>ease-in-out</code> tends to read as the smoothest option.</p>
 
 				<h4>Link color and underline</h4>
 				<p>The toggle links inherit your theme's link styling on purpose, which is why the plugin sets almost nothing of its own. To override that, add a rule rather than edit the plugin's:</p>
-				<pre><code>.srm-toggle {
+				<pre><code>.tuckaway-toggle {
 	color: #1C1C1E;
 	text-decoration: none;
 }</code></pre>
@@ -547,11 +547,12 @@ define( 'SIMPLE_READ_MORE_LABEL_LESS', 'Show Less' );</code></pre>
 					<tbody>
 						<tr><td>WordPress core update</td><td><span class="risk verylow">Very low</span></td><td>Nothing — only long-stable, non-deprecated functions are used.</td></tr>
 						<tr><td>Theme switch</td><td><span class="risk verylow">Very low</span></td><td>Nothing — the plugin never touches theme files.</td></tr>
-						<tr><td>A new plugin, later</td><td><span class="risk medium">Medium</span></td><td>A class literally named <code>.srm-toggle</code>, <code>.srm-hide-el</code>, or <code>.srm-marker</code> could collide. Deliberately unlikely, not impossible.</td></tr>
-						<tr><td>A caching plugin</td><td><span class="risk low">Low</span></td><td>Exclude <code>assets/css/simple-read-more.css</code> and <code>assets/js/simple-read-more.js</code> from aggressive minification if the animation stops.</td></tr>
+						<tr><td>A new plugin, later</td><td><span class="risk medium">Medium</span></td><td>A class literally named <code>.tuckaway-toggle</code>, <code>.tuckaway-hide-el</code>, or <code>.tuckaway-marker</code> could collide. Deliberately unlikely, not impossible.</td></tr>
+						<tr><td>Another read-more plugin</td><td><span class="risk low">Low</span></td><td>If it also registers <code>[readmore]</code>, only one of the two plugins gets it. Use <code>[tuckaway]</code> instead, which does the same thing.</td></tr>
+						<tr><td>A caching plugin</td><td><span class="risk low">Low</span></td><td>Exclude <code>assets/css/tuckaway.css</code> and <code>assets/js/tuckaway.js</code> from aggressive minification if the animation stops.</td></tr>
 					</tbody>
 				</table>
-				<p>If something does break: deactivate the plugin first to confirm it's the cause, then check the console for an error mentioning <code>srm</code> or <code>simpleReadMore</code>.</p>
+				<p>If something does break: deactivate the plugin first to confirm it's the cause, then check the console for an error mentioning <code>tuckaway</code>.</p>
 			</div>
 		</details>
 
@@ -561,10 +562,10 @@ define( 'SIMPLE_READ_MORE_LABEL_LESS', 'Show Less' );</code></pre>
 				<table>
 					<tbody>
 						<tr><td>Split content</td><td>Type <code>[readmore]</code> on its own line</td></tr>
-						<tr><td>Where shortcodes don't run</td><td><code>&lt;span class="srm-marker"&gt;&lt;/span&gt;</code></td></tr>
-						<tr><td>Change the wording</td><td><code>simple_read_more_labels</code> filter, or the two <code>SIMPLE_READ_MORE_LABEL_*</code> constants</td></tr>
-						<tr><td>Change the speed</td><td><code>.srm-hide-el</code> transition, via Additional CSS</td></tr>
-						<tr><td>Change the color</td><td><code>.srm-toggle</code> rule, via Additional CSS</td></tr>
+						<tr><td>Where shortcodes don't run</td><td><code>&lt;span class="tuckaway-marker"&gt;&lt;/span&gt;</code></td></tr>
+						<tr><td>Change the wording</td><td><code>tuckaway_labels</code> filter, or the two <code>TUCKAWAY_LABEL_*</code> constants</td></tr>
+						<tr><td>Change the speed</td><td><code>.tuckaway-hide-el</code> transition, via Additional CSS</td></tr>
+						<tr><td>Change the color</td><td><code>.tuckaway-toggle</code> rule, via Additional CSS</td></tr>
 						<tr><td>Rule out this plugin</td><td>Deactivate it and see if the issue disappears</td></tr>
 					</tbody>
 				</table>
@@ -575,7 +576,7 @@ define( 'SIMPLE_READ_MORE_LABEL_LESS', 'Show Less' );</code></pre>
 
 <footer>
 	<div class="wrap">
-		<p>Simple Read More — a free, GPL-licensed WordPress plugin.</p>
+		<p>Tuckaway — a free, GPL-licensed WordPress plugin.</p>
 	</div>
 </footer>
 

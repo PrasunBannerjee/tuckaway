@@ -2,7 +2,7 @@
 /**
  * The [readmore] shortcode.
  *
- * @package SimpleReadMore
+ * @package Tuckaway
  */
 
 // Block direct access.
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-final class Simple_Read_More_Shortcode {
+final class Tuckaway_Shortcode {
 
 	/**
 	 * Shortcode tag.
@@ -32,10 +32,23 @@ final class Simple_Read_More_Shortcode {
 	const TAG = 'readmore';
 
 	/**
+	 * Second tag that does exactly the same thing.
+	 *
+	 * [readmore] is the obvious name for any read-more plugin to claim,
+	 * and when two active plugins register the same tag only one of them
+	 * wins. [tuckaway] carries this plugin's own name, so it always
+	 * reaches this plugin whatever else is installed.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	const TAG_ALIAS = 'tuckaway';
+
+	/**
 	 * CSS class the front-end script looks for.
 	 *
 	 * This one is effectively public API: the documentation tells site
-	 * owners to paste `<span class="srm-marker"></span>` by hand into
+	 * owners to paste `<span class="tuckaway-marker"></span>` by hand into
 	 * widgets that do not run shortcodes. Renaming it in a future
 	 * release would silently break every page doing that, so treat it
 	 * as fixed.
@@ -43,7 +56,7 @@ final class Simple_Read_More_Shortcode {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const MARKER_CLASS = 'srm-marker';
+	const MARKER_CLASS = 'tuckaway-marker';
 
 	/**
 	 * Hook the shortcode.
@@ -54,6 +67,7 @@ final class Simple_Read_More_Shortcode {
 	 */
 	public static function register() {
 		add_shortcode( self::TAG, array( __CLASS__, 'render' ) );
+		add_shortcode( self::TAG_ALIAS, array( __CLASS__, 'render' ) );
 	}
 
 	/**
@@ -72,7 +86,7 @@ final class Simple_Read_More_Shortcode {
 
 		// The assets load only on views that use the plugin, and this
 		// is the most reliable signal that this one does.
-		Simple_Read_More_Assets::request();
+		Tuckaway_Assets::request();
 
 		return '<span class="' . esc_attr( self::MARKER_CLASS ) . '" aria-hidden="true"></span>';
 	}

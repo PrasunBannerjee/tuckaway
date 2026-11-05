@@ -33,7 +33,7 @@ http.createServer((req, res) => {
 
 	// path.relative() rather than a startsWith() check on the joined
 	// path: startsWith() would also accept a sibling folder whose name
-	// merely begins with this one's, such as "simple-read-more-backup".
+	// merely begins with this one's, such as "tuckaway-backup".
 	const file = path.join(ROOT, rel);
 	const fromRoot = path.relative(ROOT, file);
 	if (fromRoot.startsWith('..') || path.isAbsolute(fromRoot)) {

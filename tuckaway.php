@@ -1,19 +1,19 @@
 <?php
 /**
- * Plugin Name:       Simple Read More
- * Plugin URI:        https://github.com/PrasunBannerjee/simple-read-more
+ * Plugin Name:       Tuckaway
+ * Plugin URI:        https://github.com/PrasunBannerjee/tuckaway
  * Description:       Adds a [readmore] shortcode that splits content into a visible part and a collapsible Read More / Read Less part.
  * Version:           1.0.0
  * Requires at least: 5.8
  * Requires PHP:      7.2
- * Author:            Prasun Bannerjee
+ * Author:            TickTechToe
  * Author URI:        https://ticktechtoe.in
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       simple-read-more
+ * Text Domain:       tuckaway
  * Domain Path:       /languages
  *
- * @package SimpleReadMore
+ * @package Tuckaway
  */
 
 // Block direct access.
@@ -31,10 +31,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * IMPORTANT: editing this file directly means your change is
  * overwritten the next time the plugin updates. To make the change
  * permanent, either define the constants in wp-config.php instead, or
- * use the `simple_read_more_labels` filter from your child theme's
+ * use the `tuckaway_labels` filter from your child theme's
  * functions.php:
  *
- *     add_filter( 'simple_read_more_labels', function ( $labels ) {
+ *     add_filter( 'tuckaway_labels', function ( $labels ) {
  *         $labels['more'] = 'Show More';
  *         $labels['less'] = 'Show Less';
  *         return $labels;
@@ -42,24 +42,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Both options are documented in readme.txt and docs/usage-manual.html.
  */
-if ( ! defined( 'SIMPLE_READ_MORE_LABEL_MORE' ) ) {
-	define( 'SIMPLE_READ_MORE_LABEL_MORE', 'Read More' );
+if ( ! defined( 'TUCKAWAY_LABEL_MORE' ) ) {
+	define( 'TUCKAWAY_LABEL_MORE', 'Read More' );
 }
-if ( ! defined( 'SIMPLE_READ_MORE_LABEL_LESS' ) ) {
-	define( 'SIMPLE_READ_MORE_LABEL_LESS', 'Read Less' );
+if ( ! defined( 'TUCKAWAY_LABEL_LESS' ) ) {
+	define( 'TUCKAWAY_LABEL_LESS', 'Read Less' );
 }
 
 /**
  * Plugin metadata constants. Not intended to be edited.
  */
-define( 'SIMPLE_READ_MORE_VERSION', '1.0.0' );
-define( 'SIMPLE_READ_MORE_FILE', __FILE__ );
-define( 'SIMPLE_READ_MORE_PATH', plugin_dir_path( __FILE__ ) );
-define( 'SIMPLE_READ_MORE_URL', plugin_dir_url( __FILE__ ) );
+define( 'TUCKAWAY_VERSION', '1.0.0' );
+define( 'TUCKAWAY_FILE', __FILE__ );
+define( 'TUCKAWAY_PATH', plugin_dir_path( __FILE__ ) );
+define( 'TUCKAWAY_URL', plugin_dir_url( __FILE__ ) );
 
-require_once SIMPLE_READ_MORE_PATH . 'includes/class-simple-read-more.php';
-require_once SIMPLE_READ_MORE_PATH . 'includes/class-simple-read-more-shortcode.php';
-require_once SIMPLE_READ_MORE_PATH . 'includes/class-simple-read-more-assets.php';
+require_once TUCKAWAY_PATH . 'includes/class-tuckaway.php';
+require_once TUCKAWAY_PATH . 'includes/class-tuckaway-shortcode.php';
+require_once TUCKAWAY_PATH . 'includes/class-tuckaway-assets.php';
 
 /**
  * Boot the plugin.
@@ -70,7 +70,7 @@ require_once SIMPLE_READ_MORE_PATH . 'includes/class-simple-read-more-assets.php
  * This timing does not affect the labels. The label constants are
  * fixed when this file is read, near the top, before `plugins_loaded`
  * fires and before any theme loads, so they can only be set ahead of
- * that, in wp-config.php. The `simple_read_more_labels` filter is
+ * that, in wp-config.php. The `tuckaway_labels` filter is
  * applied much later, when the assets are enqueued, so a theme or
  * plugin can add it at any point before then.
  *
@@ -78,7 +78,7 @@ require_once SIMPLE_READ_MORE_PATH . 'includes/class-simple-read-more-assets.php
  *
  * @return void
  */
-function simple_read_more_bootstrap() {
-	Simple_Read_More::instance()->run();
+function tuckaway_bootstrap() {
+	Tuckaway::instance()->run();
 }
-add_action( 'plugins_loaded', 'simple_read_more_bootstrap' );
+add_action( 'plugins_loaded', 'tuckaway_bootstrap' );

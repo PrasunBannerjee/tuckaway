@@ -6,7 +6,7 @@
 	Windows-native equivalent of bin/build-zip.sh, for use without WSL,
 	rsync, or zip. Every top-level entry listed in .distignore is
 	excluded, so the archive carries only runtime files. The archive's
-	top-level folder is always "simple-read-more", which is what
+	top-level folder is always "tuckaway", which is what
 	WordPress uses as the install directory name.
 
 .EXAMPLE
@@ -15,7 +15,7 @@
 
 $ErrorActionPreference = 'Stop'
 
-$Slug     = 'simple-read-more'
+$Slug     = 'tuckaway'
 $RootDir  = Split-Path -Parent $PSScriptRoot
 $BuildDir = Join-Path $RootDir 'build'
 $StageDir = Join-Path $BuildDir $Slug
@@ -57,6 +57,12 @@ Get-ChildItem -Path $RootDir -Force |
 	Where-Object { $Excludes -notcontains $_.Name } |
 	ForEach-Object { Copy-Item $_.FullName -Destination $StageDir -Recurse -Force }
 
+# OS clutter can sit at any depth, not just the top level: Finder drops
+# a .DS_Store into any folder it opens, and Explorer a Thumbs.db, and
+# WordPress.org rejects hidden files in a plugin.
+Get-ChildItem -Path $StageDir -Recurse -Force -Include '.DS_Store', 'Thumbs.db' |
+	Remove-Item -Force
+
 # Safety net: these must never reach the directory, whatever the
 # .distignore happens to say.
 foreach ($forbidden in @('.git', 'node_modules', 'vendor')) {
@@ -68,7 +74,7 @@ foreach ($forbidden in @('.git', 'node_modules', 'vendor')) {
 $ZipPath = Join-Path $BuildDir "$Slug-$Version.zip"
 
 # Not Compress-Archive: in Windows PowerShell 5.1 it writes entry names
-# with backslashes ("simple-read-more\assets\..."). The zip format
+# with backslashes ("tuckaway\assets\..."). The zip format
 # requires forward slashes, and unzip tools on Linux, which is where
 # WordPress.org and most hosts run, treat a backslash as part of the
 # file name, so the plugin could unpack as a few oddly named files

@@ -4,7 +4,7 @@
 #
 # Every top-level entry listed in .distignore is excluded, so the
 # archive carries only runtime files. The archive's top-level folder is
-# always "simple-read-more", which is what WordPress uses as the install
+# always "tuckaway", which is what WordPress uses as the install
 # directory name.
 #
 # Requires rsync and zip. On Windows, use bin/build-zip.ps1 instead.
@@ -13,7 +13,7 @@
 
 set -euo pipefail
 
-SLUG="simple-read-more"
+SLUG="tuckaway"
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD_DIR="${ROOT_DIR}/build"
 STAGE_DIR="${BUILD_DIR}/${SLUG}"
@@ -51,7 +51,10 @@ mkdir -p "${STAGE_DIR}"
 # Turn .distignore into rsync exclude rules. The leading slash anchors
 # each rule to the top level of the transfer, which is what keeps this
 # script and build-zip.ps1 in agreement about what gets dropped.
-EXCLUDES=( "--exclude=/build" )
+# OS clutter is excluded at every depth, not just the top level:
+# Finder drops a .DS_Store into any folder it opens, and Explorer a
+# Thumbs.db, and WordPress.org rejects hidden files in a plugin.
+EXCLUDES=( "--exclude=/build" "--exclude=.DS_Store" "--exclude=Thumbs.db" )
 while IFS= read -r line || [ -n "${line}" ]; do
 	line="${line%$'\r'}"
 	case "${line}" in

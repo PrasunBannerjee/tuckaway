@@ -1,4 +1,4 @@
-# Simple Read More — brand reference
+# Tuckaway — brand reference
 
 Quick reference for anyone producing more assets later (screenshots, a
 social preview image, a README header). The icon, banner, and manual

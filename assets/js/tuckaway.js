@@ -1,10 +1,10 @@
 /**
- * Simple Read More — front-end behaviour.
+ * Tuckaway — front-end behaviour.
  *
  * Finds every marker on the page and, for each one, turns every
  * element that follows it into its own self-collapsing unit, without
  * ever moving that element out of its original parent. See the
- * ARCHITECTURE NOTE in includes/class-simple-read-more-assets.php for
+ * ARCHITECTURE NOTE in includes/class-tuckaway-assets.php for
  * the full reasoning behind that constraint.
  *
  * Each toggle is a real <a href="#"> so it automatically picks up
@@ -30,7 +30,7 @@
  * Vanilla JS only, wrapped in an IIFE so nothing leaks into the
  * global namespace. Uses only current, non-deprecated DOM APIs.
  *
- * @package SimpleReadMore
+ * @package Tuckaway
  */
 
 ( function () {
@@ -40,40 +40,40 @@
 	// label constants stay the single source of truth. The fallbacks
 	// keep the script working on its own if that inline block is ever
 	// stripped by an aggressive optimisation plugin.
-	var config = window.simpleReadMoreConfig || {};
-	var SRM_LABEL_MORE = config.labelMore || 'Read More';
-	var SRM_LABEL_LESS = config.labelLess || 'Read Less';
+	var config = window.tuckawayConfig || {};
+	var TUCKAWAY_LABEL_MORE = config.labelMore || 'Read More';
+	var TUCKAWAY_LABEL_LESS = config.labelLess || 'Read Less';
 
 	// Incremented per instance so ids stay unique even with several
 	// [readmore] sections on the same page.
-	var srmInstanceCount = 0;
+	var tuckawayInstanceCount = 0;
 
 	// Tags whose direct children must not be relocated: li/tr need to
 	// stay direct children of ul/ol/table to render bullets, numbering,
 	// and table layout correctly.
-	var SRM_STRUCTURAL_TAGS = [ 'UL', 'OL', 'TABLE' ];
+	var TUCKAWAY_STRUCTURAL_TAGS = [ 'UL', 'OL', 'TABLE' ];
 
 	// Paragraph-like elements: a marker inside one of these splits that
 	// element in two. A marker directly inside anything else that is
 	// block-level (a div, a page-builder widget, a table cell) stays
-	// inside it; see srmSetupMarker().
-	var SRM_TEXT_BLOCK_TAGS = [ 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'LI', 'DT', 'DD', 'PRE', 'ADDRESS', 'FIGCAPTION' ];
+	// inside it; see tuckawaySetupMarker().
+	var TUCKAWAY_TEXT_BLOCK_TAGS = [ 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'LI', 'DT', 'DD', 'PRE', 'ADDRESS', 'FIGCAPTION' ];
 
-	function srmInit() {
-		var markers = document.querySelectorAll( '.srm-marker' );
+	function tuckawayInit() {
+		var markers = document.querySelectorAll( '.tuckaway-marker' );
 		if ( ! markers.length ) {
 			return;
 		}
 		// Convert to a static array up front. Once we start moving
 		// nodes around, a live NodeList could change under us.
-		Array.prototype.slice.call( markers ).forEach( srmSetupMarker );
+		Array.prototype.slice.call( markers ).forEach( tuckawaySetupMarker );
 	}
 
-	function srmSetupMarker( marker ) {
-		if ( marker.dataset.srmDone === '1' ) {
+	function tuckawaySetupMarker( marker ) {
+		if ( marker.dataset.tuckawayDone === '1' ) {
 			return;
 		}
-		marker.dataset.srmDone = '1';
+		marker.dataset.tuckawayDone = '1';
 
 		var parentEl = marker.parentElement;
 		if ( ! parentEl || ! parentEl.parentElement ) {
@@ -103,7 +103,7 @@
 		// sits in a line, which is how page builders often lay out a
 		// widget next to the one after it. Treating those as text would
 		// split the widget in two and hide the widgets that follow it.
-		var isInBox = SRM_TEXT_BLOCK_TAGS.indexOf( parentEl.tagName ) === -1 &&
+		var isInBox = TUCKAWAY_TEXT_BLOCK_TAGS.indexOf( parentEl.tagName ) === -1 &&
 			window.getComputedStyle( parentEl ).display !== 'inline';
 
 		var anchorEl = isInBox ? marker : parentEl;
@@ -112,9 +112,9 @@
 		var hostSourceEls = [];
 
 		if ( isInBox ) {
-			srmWrapTrailingText( marker );
+			tuckawayWrapTrailingText( marker );
 		} else {
-			srmSplitAnchor( marker, anchorEl, containerEl, hostSourceEls );
+			tuckawaySplitAnchor( marker, anchorEl, containerEl, hostSourceEls );
 		}
 
 		// Anything that already followed the anchor element (or, if a
@@ -135,7 +135,7 @@
 			return;
 		}
 
-		srmSetupToggles( anchorEl, containerEl, hostSourceEls );
+		tuckawaySetupToggles( anchorEl, containerEl, hostSourceEls );
 		marker.remove();
 	}
 
@@ -145,16 +145,16 @@
 	// elements after the marker are left as they are. A <div> is used
 	// because it inherits the box's text styling and, like a paragraph
 	// would, lines up with the box's other blocks.
-	function srmWrapTrailingText( marker ) {
+	function tuckawayWrapTrailingText( marker ) {
 		var parentEl = marker.parentElement;
 		var runEl = null;
 
-		srmDropLeadingBreak( marker );
+		tuckawayDropLeadingBreak( marker );
 		var node = marker.nextSibling;
 
 		while ( node ) {
 			var nextNode = node.nextSibling;
-			if ( srmIsInlineNode( node ) ) {
+			if ( tuckawayIsInlineNode( node ) ) {
 				if ( ! runEl ) {
 					if ( node.nodeType === 3 && ! node.nodeValue.trim() ) {
 						// Whitespace between blocks; leave it where it is.
@@ -173,7 +173,7 @@
 	}
 
 	// True for text, and for elements that are laid out inline.
-	function srmIsInlineNode( node ) {
+	function tuckawayIsInlineNode( node ) {
 		if ( node.nodeType === 3 ) {
 			return true;
 		}
@@ -188,7 +188,7 @@
 	// the marker's line, not the hidden text's. Left in place it would
 	// open the revealed text with an empty line, so it is dropped,
 	// along with any whitespace before it.
-	function srmDropLeadingBreak( marker ) {
+	function tuckawayDropLeadingBreak( marker ) {
 		var node = marker.nextSibling;
 		while ( node && node.nodeType === 3 && ! node.nodeValue.trim() ) {
 			node = node.nextSibling;
@@ -203,7 +203,7 @@
 
 	// Splits the element holding the marker, as described below, and
 	// adds the twin (if any) to hostSourceEls.
-	function srmSplitAnchor( marker, anchorEl, containerEl, hostSourceEls ) {
+	function tuckawaySplitAnchor( marker, anchorEl, containerEl, hostSourceEls ) {
 		// If the marker sits in the middle of a paragraph (or heading,
 		// list item, etc.) rather than alone on its own line, split
 		// that element into two at the marker: the original element
@@ -215,7 +215,7 @@
 		// whether that CSS targets it by class or by its position in
 		// the page; no styling is copied or guessed, only the real
 		// attributes that were already there.
-		srmDropLeadingBreak( marker );
+		tuckawayDropLeadingBreak( marker );
 		var trailingInlineNodes = [];
 		var node = marker.nextSibling;
 		while ( node ) {
@@ -247,33 +247,33 @@
 		// entirely rather than leave a blank element (which would
 		// otherwise still show its own margin as empty space).
 		if ( ! anchorEl.childNodes.length ) {
-			anchorEl.classList.add( 'srm-anchor-empty' );
+			anchorEl.classList.add( 'tuckaway-anchor-empty' );
 		}
 	}
 
 	// Collapses every element in hostSourceEls and adds the two toggles:
 	// "Read More" right after anchorEl, "Read Less" after the last
 	// collapsed element.
-	function srmSetupToggles( anchorEl, containerEl, hostSourceEls ) {
-		srmInstanceCount += 1;
-		var idBase = 'srm-collapse-' + srmInstanceCount;
+	function tuckawaySetupToggles( anchorEl, containerEl, hostSourceEls ) {
+		tuckawayInstanceCount += 1;
+		var idBase = 'tuckaway-collapse-' + tuckawayInstanceCount;
 
 		var hostEls = hostSourceEls.map( function ( rawEl, i ) {
-			return srmConvertToHost( rawEl, idBase + '-' + i );
+			return tuckawayConvertToHost( rawEl, idBase + '-' + i );
 		} );
 
 		var collapseIds = hostEls.map( function ( h ) {
 			return h.id;
 		} ).join( ' ' );
 
-		var linkMoreEl = srmBuildToggle( 'srm-toggle-more', SRM_LABEL_MORE, collapseIds );
-		var linkLessEl = srmBuildToggle( 'srm-toggle-less', SRM_LABEL_LESS, collapseIds );
-		srmSetToggleHidden( linkLessEl, true );
+		var linkMoreEl = tuckawayBuildToggle( 'tuckaway-toggle-more', TUCKAWAY_LABEL_MORE, collapseIds );
+		var linkLessEl = tuckawayBuildToggle( 'tuckaway-toggle-less', TUCKAWAY_LABEL_LESS, collapseIds );
+		tuckawaySetToggleHidden( linkLessEl, true );
 
 		var firstHostEl = hostEls[ 0 ];
 		var lastHostEl = hostEls[ hostEls.length - 1 ];
 
-		// Lets srmToggle() move focus to the start of the revealed text
+		// Lets tuckawayToggle() move focus to the start of the revealed text
 		// without adding that element to the Tab order. An element that
 		// already carries its own tabindex is left alone.
 		if ( ! firstHostEl.hasAttribute( 'tabindex' ) ) {
@@ -295,18 +295,18 @@
 
 		var isOpenState = false;
 
-		function srmToggle( event ) {
+		function tuckawayToggle( event ) {
 			// Prevent the "#" href from jumping the page to the top.
 			event.preventDefault();
 			isOpenState = ! isOpenState;
 			hostEls.forEach( function ( hostEl ) {
-				hostEl.classList.toggle( 'srm-is-open', isOpenState );
+				hostEl.classList.toggle( 'tuckaway-is-open', isOpenState );
 				hostEl.toggleAttribute( 'inert', ! isOpenState );
 			} );
 			linkMoreEl.setAttribute( 'aria-expanded', isOpenState ? 'true' : 'false' );
 			linkLessEl.setAttribute( 'aria-expanded', isOpenState ? 'true' : 'false' );
-			srmSetToggleHidden( linkMoreEl, isOpenState );
-			srmSetToggleHidden( linkLessEl, ! isOpenState );
+			tuckawaySetToggleHidden( linkMoreEl, isOpenState );
+			tuckawaySetToggleHidden( linkLessEl, ! isOpenState );
 
 			// The link just activated is now hidden, and a hidden element
 			// cannot keep focus, so the browser would drop it back to the
@@ -326,17 +326,17 @@
 
 		// Native <a> elements only fire "click" from the Enter key.
 		// This mirrors native <button> behavior so Space also works.
-		function srmHandleKeydown( event ) {
+		function tuckawayHandleKeydown( event ) {
 			if ( event.key === ' ' || event.key === 'Spacebar' || event.keyCode === 32 ) {
 				event.preventDefault();
 				event.target.click();
 			}
 		}
 
-		linkMoreEl.addEventListener( 'click', srmToggle );
-		linkLessEl.addEventListener( 'click', srmToggle );
-		linkMoreEl.addEventListener( 'keydown', srmHandleKeydown );
-		linkLessEl.addEventListener( 'keydown', srmHandleKeydown );
+		linkMoreEl.addEventListener( 'click', tuckawayToggle );
+		linkLessEl.addEventListener( 'click', tuckawayToggle );
+		linkMoreEl.addEventListener( 'keydown', tuckawayHandleKeydown );
+		linkLessEl.addEventListener( 'keydown', tuckawayHandleKeydown );
 	}
 
 	// Turns an existing element into a self-collapsing unit. In the
@@ -349,22 +349,22 @@
 	// a small wrapper div is placed around the element instead; the
 	// element itself still never leaves its original position in the
 	// page, it is simply nested one level deeper.
-	function srmConvertToHost( hostEl, id ) {
+	function tuckawayConvertToHost( hostEl, id ) {
 		var targetEl = hostEl;
 		var needsOutsideWrap =
-			SRM_STRUCTURAL_TAGS.indexOf( hostEl.tagName ) !== -1 || ! hostEl.firstChild;
+			TUCKAWAY_STRUCTURAL_TAGS.indexOf( hostEl.tagName ) !== -1 || ! hostEl.firstChild;
 
 		if ( needsOutsideWrap ) {
 			targetEl = document.createElement( 'div' );
 			hostEl.parentElement.insertBefore( targetEl, hostEl );
 
 			var outerInnerEl = document.createElement( 'div' );
-			outerInnerEl.className = 'srm-hide-el-inner';
+			outerInnerEl.className = 'tuckaway-hide-el-inner';
 			outerInnerEl.appendChild( hostEl );
 			targetEl.appendChild( outerInnerEl );
 		} else {
 			var innerEl = document.createElement( 'span' );
-			innerEl.className = 'srm-hide-el-inner';
+			innerEl.className = 'tuckaway-hide-el-inner';
 			while ( hostEl.firstChild ) {
 				innerEl.appendChild( hostEl.firstChild );
 			}
@@ -374,7 +374,7 @@
 		if ( ! targetEl.id ) {
 			targetEl.id = id;
 		}
-		targetEl.classList.add( 'srm-hide-el' );
+		targetEl.classList.add( 'tuckaway-hide-el' );
 		targetEl.setAttribute( 'inert', '' ); // starts collapsed
 
 		return targetEl;
@@ -388,14 +388,14 @@
 	// inline-block link ignores them and drifts to the container's left
 	// edge, outside the column. The wrapper is the block box that gets
 	// aligned, and the link simply sits at its start, like text.
-	function srmBuildToggle( extraClass, label, collapseIds ) {
+	function tuckawayBuildToggle( extraClass, label, collapseIds ) {
 		var wrapEl = document.createElement( 'div' );
-		wrapEl.className = 'srm-toggle-wrap';
+		wrapEl.className = 'tuckaway-toggle-wrap';
 
 		var linkEl = document.createElement( 'a' );
 		linkEl.href = '#';
 		linkEl.setAttribute( 'role', 'button' );
-		linkEl.className = 'srm-toggle ' + extraClass;
+		linkEl.className = 'tuckaway-toggle ' + extraClass;
 		linkEl.textContent = label;
 		linkEl.setAttribute( 'aria-expanded', 'false' );
 		linkEl.setAttribute( 'aria-controls', collapseIds );
@@ -408,14 +408,14 @@
 	// the link would leave an empty wrapper behind, and block themes
 	// put a gap above every child of the container, so that empty
 	// wrapper would still show up as blank space.
-	function srmSetToggleHidden( linkEl, isHidden ) {
+	function tuckawaySetToggleHidden( linkEl, isHidden ) {
 		linkEl.hidden = isHidden;
 		linkEl.parentElement.hidden = isHidden;
 	}
 
 	if ( document.readyState === 'loading' ) {
-		document.addEventListener( 'DOMContentLoaded', srmInit );
+		document.addEventListener( 'DOMContentLoaded', tuckawayInit );
 	} else {
-		srmInit();
+		tuckawayInit();
 	}
 }() );
