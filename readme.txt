@@ -1,4 +1,4 @@
-=== Tuckaway – Collapsible Read More Content ===
+=== Tuckaway ===
 Contributors: prasunbannerjee
 Tags: read more, read less, expand, collapse, shortcode
 Requires at least: 5.8
