@@ -25,11 +25,13 @@ for code, shortcodes, and file names — nowhere else.
 
 ## Mark
 
-Five horizontal rules of one thickness, arranged full / short / full /
-short / full, struck through between the third and fourth rule by one
-full-width Flare rule that crosses nothing else. The two rules below the
-strike sit at 45% opacity — content that exists but hasn't been
-revealed yet, which is the whole idea of the plugin stated as a shape.
+Five horizontal rules of one thickness that form a T: one full-width
+crossbar on top, then a centred stem of four short rules, each about a
+quarter of the crossbar's width. One full-width Flare rule strikes
+through between the third and fourth rule and crosses nothing else.
+The two stem rules below the strike sit at 45% opacity — content that
+exists but hasn't been revealed yet, which is the whole idea of the
+plugin stated as a shape.
 Never reproduced below 32px; never tiled, outlined, or given a
 background shape of its own.
 

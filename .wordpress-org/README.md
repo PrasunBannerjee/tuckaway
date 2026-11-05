@@ -15,27 +15,22 @@ plugin is submitted.
 
 | File | Size | Source |
 | --- | --- | --- |
-| `assets/icon-256x256.png` | 256 × 256 | Downscaled from the brand kit's `Logo-icon-only-dark.png` (2400×2400), the ink-on-white mark. |
-| `assets/icon-128x128.png` | 128 × 128 | Same source, downscaled again. |
-| `assets/banner-772x250.png` | 772 × 250 | Rebuilt from `banner.svg`, with one change from the delivered file — see below. |
-| `assets/banner-1544x500.png` | 1544 × 500 | Rebuilt from `banner-retina.svg`, same change. |
+| `assets/icon-256x256.png` | 256 × 256 | Drawn by `bin/draw-brand-assets.py`: the stacked-T mark, ink on a transparent ground. |
+| `assets/icon-128x128.png` | 128 × 128 | Same drawing, rendered at half size. |
+| `assets/banner-772x250.png` | 772 × 250 | Drawn by the same script: paper mark on ink, with the Flare strike running in from the left edge. |
+| `assets/banner-1544x500.png` | 1544 × 500 | Same drawing, rendered at 2x. |
 
-**One deliberate edit from the delivered brand kit.** Both banner SVGs
-ship with the plugin name outlined directly into the artwork, sitting
-in the exact calm left third the guide's own rules reserve for
-WordPress's title overlay:
+To change the mark, edit the script and run it again rather than
+editing the PNGs by hand, so all four stay in step:
 
-> "No type in the artwork — the directory renders the plugin name and
-> author over the calm left third." / "Don't put the plugin name inside
-> the icon or the banner artwork."
+```bash
+python3 -m pip install pillow
+python3 bin/draw-brand-assets.py .wordpress-org/assets
+```
 
-Shipping the banner as delivered would put the plugin's title on the
-image twice — once baked into the pixels, once again as WordPress's own
-overlay — which is exactly what that rule exists to prevent. The
-outlined title path was a single, cleanly separable SVG element, so it
-was removed before rasterizing; everything else (ink ground, mark, the
-full-width strike) is untouched. **Confirmed:** the banners ship
-without the baked-in title.
+**No type in the artwork.** The banners carry no text, because the
+directory renders the plugin name and author over the calm left third
+of the banner. A title baked into the pixels would show twice.
 
 **One judgment call on the icon.** WordPress.org doesn't support a
 separate icon for dark mode, only one file, so a choice had to be made
